@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers.libro import libro
+from routers.libros import libro
 
 
 app = FastAPI()

@@ -1,48 +1,41 @@
-from typing import Union
-
-from fastapi import FastAPI
-from pydantic import BaseModel
-from datetime import date
-
-from sqlalchemy import Table, Column, Integer, String
+from sqlalchemy import Table, Column
+from sqlalchemy.sql.sqltypes import Integer, String
 from config.db import meta, engine
+# from sqlalchemy import Column, Integer, String, ForeignKey, Text
+# from pydantic import BaseModel
+# from datetime import date
+# from typing import Optional  # Union, List, Dict
 
-libros = Table('Libros', meta,
+
+libros = Table('libros', meta,
                Column('id', Integer, primary_key=True),
                Column('titulo', String(255)),
-               Column('subtítulo', String(255)),
+               Column('subtitulo', String(255)),
                Column('autor', String(255)),
-               Column('categoría', String(255)),
-               Column('fecha_publicacion', String(255)),
+               Column('categoria', String(255)),
+               Column('fechapublicacion', String(255)),
                Column('editor', String(255)),
                Column('descripcion', String(255)),
                Column('imagen', String(255)),
                )
 
 meta.create_all(engine)
-
-
-"""
-class MiModelo(Base):
-    __tablename__ = 'nombre_tabla'
-    id = Column(Integer, primary_key=True)
-    nombre = Column(String(50))
-    edad = Column(Integer)
-    correo = Column(String(100))
-
-"""
-
-
 # class Libro(BaseModel):
-#     id: int
+#     __tablename__ = "libros"
+#     id = Column(Integer, primary_key=True, index=True)
+#     titulo = Column(String, index=True)
+#     subtitulo = Column(String, index=True, nullable=True)
+#     fecha_publicacion = Column(String, nullable=True)
+#     editor_id = Column(Integer, ForeignKey("editores.id"), nullable=True)
+#     descripcion = Column(Text, nullable=True)
+#     imagen = Column(String, nullable=True)
+    
+    
 #     titulo: str
-#     subtítulo: str
+#     subtitulo: str
 #     autor: str
-#     categoría: str
-#     fecha_publicacion: date
-#     editor: Union[str, None] = None
+#     categoria: str
+#     fechapublicacion: date
+#     editor: Optional[str]
 #     descripcion: str
-#     imagen: str[Optional]
-
-
-app = FastAPI()
+#     imagen: Optional[str]
